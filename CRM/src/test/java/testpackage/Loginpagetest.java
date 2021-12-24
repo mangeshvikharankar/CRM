@@ -3,9 +3,11 @@ package testpackage;
 import java.io.IOException;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import basepack.Baseclass;
@@ -14,47 +16,45 @@ import pompackage.Loginpage;
 
 public class Loginpagetest extends Baseclass
 {
-	
 	Loginpage logintest;
 	Homepage homepage;
-	public Loginpagetest()
-	{
-		super();
-	}
 	
+//	public Loginpagetest()
+//	{
+//		super();
+//	}
+	
+	 @BeforeClass
+	 public void intialize()
+	 {
+		 driverintialization();
+	 }
+	 
 	@BeforeMethod 
-	public void intialize()
+	public void CreatePomobject()
 	{
-		driverintialization();
 		logintest = new Loginpage();
+		String title = logintest.verifyloginpagetitle();
+		Assert.assertEquals(title, "Cogmento CRM");
 	}
-	
-	@Test(priority=1)
-	public void Titlverification()
+	 
+	@Test 
+	public void logintestfunctionaility() throws IOException
 	{
-		String title = logintest.verifyloginpage();
-		Assert.assertEquals(title, "CRMPRO  - CRM software for customer relationship management, sales, and support.");
+		homepage = logintest.loginfunctionality(prop.getProperty("email"), prop.getProperty("password"));
 	}
-	
-	 @Test(priority=2)
-	 public void CRMlogoverification()
-	 {
-		 boolean logo = logintest.CRMlogo();
-		 Assert.assertTrue(logo);
-	 }
-	 
-	 @Test
-	 public void logintestfunction() throws IOException
-	 {
-		 homepage =logintest.loginfunctionality(prop.getProperty("username"), prop.getProperty("password"));
-	 }
-	 
-	  @AfterMethod 
-	  public void close()
+
+	 @AfterMethod 
+	 public void logout()
+	  {
+		  logintest.logout();
+	  }
+	  
+	 @AfterClass
+	 public void close()
 	  {
 		  driver.close();
 	  }
-	  
 	
 
 }
