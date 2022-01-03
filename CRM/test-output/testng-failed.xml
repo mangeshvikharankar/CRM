@@ -5,10 +5,10 @@
     <classes>
       <class name="testpackage.Contactspagetest">
         <methods>
-          <include name="validatecreatecontact"/>
           <include name="login"/>
           <include name="close"/>
-          <include name="logout"/>
+          <include name="screenshotwithlogout"/>
+          <include name="verifyurl"/>
           <include name="intialize"/>
         </methods>
       </class> <!-- testpackage.Contactspagetest -->

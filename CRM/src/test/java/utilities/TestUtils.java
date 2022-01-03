@@ -23,7 +23,7 @@ public class TestUtils extends Baseclass
 		 DateTimeFormatter dateformat =  DateTimeFormatter.ofPattern("dd-MM-yyyy-HH_mm_ss");
 		 String finaltime =snap.format(dateformat);
 		 File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
-		 File Destination = new File ("C:\\Users\\HP\\git\\CRM\\CRM\\test-output\\Screenshot" + "Test_"+Testid +" "+finaltime +".png");
+		 File Destination = new File ("C:\\Users\\HP\\git\\CRM\\CRM\\test-output\\Screenshot\\" + "Test_"+Testid +" "+finaltime +".png");
 		 FileHandler.copy(screenshot, Destination);
 	}
 	 
