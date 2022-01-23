@@ -17,6 +17,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import utilities.WebEventListener;
 
 public class Baseclass 
@@ -56,14 +57,15 @@ public class Baseclass
 		String browsername = prop.getProperty("browser");
 		if (browsername.equals("chrome"))
 		{
-			System.setProperty("webdriver.chrome.driver", "src" + File.separator + "test" + File.separator + "resources" + File.separator + "browsers" + File.separator + "chromedriver.exe");
-
+			//System.setProperty("webdriver.chrome.driver", "src" + File.separator + "test" + File.separator + "resources" + File.separator + "browsers" + File.separator + "chromedriver.exe");
+			WebDriverManager.chromedriver().setup();
 			 driver = new ChromeDriver();
 		}
 		else if(browsername.equals("Firefox"))
 		{
-			System.setProperty("webdriver.gecko.driver","src" + File.separator + "test" + File.separator + "resources" + File.separator + "browsers" + File.separator + "geckodriver.exe" );
-			  driver = new FirefoxDriver();
+			//System.setProperty("webdriver.gecko.driver","src" + File.separator + "test" + File.separator + "resources" + File.separator + "browsers" + File.separator + "geckodriver.exe" );
+			WebDriverManager.firefoxdriver().setup();  
+			driver = new FirefoxDriver();
 		}
 		
 		e_driver = new EventFiringWebDriver(driver);
